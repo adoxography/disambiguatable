@@ -1,0 +1,17 @@
+{
+  "name": "adoxography/laravel-disambiguatable",
+  "description": "Disambiguatable trait for Laravel models, to distinguish between identical lists of columns",
+  "type": "library",
+  "require": {
+    "php": ">=7.3"
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Graham Still",
+      "email": "gstill@uw.edu"
+    }
+  ],
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
