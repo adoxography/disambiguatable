@@ -34,10 +34,6 @@ class DisambiguatableServiceProvider extends ServiceProvider
     public function boot(): void
     {
         if ($this->app->runningInConsole()) {
-            $package_config = __DIR__ . '/../config/config.php';
-            $target_config = config_path('disambiguatable.php');
-
-            $this->publishes([$package_config => $target_config], 'config');
             $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
         }
     }
@@ -49,9 +45,6 @@ class DisambiguatableServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->mergeConfigFrom(
-            __DIR__ . '/../config/config.php',
-            'disambiguatable'
-        );
+        //
     }
 }
