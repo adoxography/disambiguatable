@@ -1,4 +1,15 @@
 <?php
+/**
+ * Handles tests for the Disambiguatable trait
+ *
+ * PHP version 7
+ *
+ * @category Test
+ * @package  Adoxography\Disambiguatable
+ * @author   Graham Still <gstill@uw.edu>
+ * @license  MIT (https://github.com/adoxography/disambiguatable/blob/master/LICENSE)
+ * @link     https://github.com/adoxography/disambiguatable
+ */
 
 namespace Adoxography\Disambiguatable\Tests\Feature;
 
@@ -8,10 +19,24 @@ use Adoxography\Disambiguatable\Disambiguation;
 use Adoxography\Disambiguatable\Disambiguatable;
 use Adoxography\Disambiguatable\Tests\TestCase;
 
+/**
+ * Defines all of the tests for the Disambiguatable trait
+ *
+ * @category Test
+ * @package  Adoxography\Disambiguatable
+ * @author   Graham Still <gstill@uw.edu>
+ * @license  MIT (https://github.com/adoxography/disambiguatable/blob/master/LICENSE)
+ * @link     https://github.com/adoxography/disambiguatable
+ */
 class DisambiguatableTest extends TestCase
 {
     use RefreshDatabase;
 
+    /**
+     * Called before each test is run
+     *
+     * @return void
+     */
     public function setUp(): void
     {
         parent::setUp();
