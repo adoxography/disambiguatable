@@ -3,8 +3,7 @@
   "description": "Disambiguatable trait for Laravel models, to distinguish between identical lists of columns",
   "type": "library",
   "require": {
-    "php": ">=7.3",
-    "illuminate/support": "^7.15"
+    "php": ">=7.3"
   },
   "license": "MIT",
   "authors": [
@@ -15,7 +14,12 @@
   ],
   "autoload": {
     "psr-4": {
-      "Adoxography\\Disambiguatable\\": "src/"
+      "Adoxography\\Disambiguatable\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Adoxography\\Disambiguatable\\Tests\\": "tests"
     }
   },
   "extra": {
@@ -25,6 +29,13 @@
       ]
     }
   },
+  "scripts": {
+    "test": "vendor/bin/phpunit"
+  },
   "minimum-stability": "dev",
-  "prefer-stable": true
+  "prefer-stable": true,
+  "require-dev": {
+    "orchestra/testbench": "^5.3",
+    "phpunit/phpunit": "^9.2"
+  }
 }
