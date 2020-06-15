@@ -40,7 +40,7 @@ trait Disambiguatable
     {
         return $this->morphOne(Disambiguation::class, 'disambiguatable')->withDefault([
             'disambiguatable_id' => null,
-            'disambiguator' => null
+            'disambiguator' => isset($this->alwaysDisambiguate) ? 0 : null
         ]);
     }
 

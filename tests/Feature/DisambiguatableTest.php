@@ -45,6 +45,24 @@ class DisambiguatableTest extends TestCase
     }
 
     /** @test */
+    public function disambiguatorDefaultsTo0IfAlwaysDisambiguateIsTrue()
+    {
+        $testModel = new class extends Model {
+            use Disambiguatable;
+
+            public $table = 'dummies';
+            protected $alwaysDisambiguate = true;
+            protected $fillable = ['field_1', 'field_2', 'field_3'];
+            protected $disambiguatableFields = ['field_1', 'field_2'];
+        };
+
+        $testModel->create();
+
+        $model = $testModel->first();
+        $this->assertSame(0, $model->disambiguator);
+    }
+
+    /** @test */
     public function disambiguatorIsAssignedWhenDuplicatesExist()
     {
         $data = ['field_1' => 'Foo', 'field_2' => 'Bar'];
