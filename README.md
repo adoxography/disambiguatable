@@ -1,4 +1,6 @@
 # disambiguatable
+[![disambiguatable](https://circleci.com/gh/adoxography/disambiguatable.svg?style=shield)](https://app.circleci.com/pipelines/github/adoxography/disambiguatable)
+
 Distinguish between Laravel models with identical sets of columns
 
 ## Installation
