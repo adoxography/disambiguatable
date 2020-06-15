@@ -3,7 +3,7 @@
   "description": "Disambiguatable trait for Laravel models, to distinguish between identical lists of columns",
   "type": "library",
   "require": {
-    "php": ">=7.3"
+    "php": ">=7.1"
   },
   "license": "MIT",
   "authors": [
