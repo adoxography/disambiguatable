@@ -122,6 +122,22 @@ trait Disambiguatable
     }
 
     /**
+     * Retrieves all of the models that match the current model, with regards to its
+     * $disambiguatableFields
+     *
+     * @return Collection
+     */
+    public function disambiguatableDuplicates(): Collection
+    {
+        $clauses = [];
+        foreach ($this->disambiguatableFields as $field) {
+            $clauses[$field] = $this->$field;
+        }
+
+        return $this->where($clauses)->get();
+    }
+
+    /**
      * Re-evaluates all of the models that match the $disambiguatableFields of
      * $model
      *
@@ -131,7 +147,7 @@ trait Disambiguatable
      */
     private static function _renumberDisambiguators(Model $model): void
     {
-        $existing = $model->_disambiguatableDuplicates();
+        $existing = $model->disambiguatableDuplicates();
 
         if ($existing->count() === 1) {
             // If there's only one match, it doesn't need to be disambiguated.
@@ -155,21 +171,5 @@ trait Disambiguatable
                 }
             }
         );
-    }
-
-    /**
-     * Retrieves all of the models that match the current model, with regards to its
-     * $disambiguatableFields
-     *
-     * @return Collection
-     */
-    private function _disambiguatableDuplicates(): Collection
-    {
-        $clauses = [];
-        foreach ($this->disambiguatableFields as $field) {
-            $clauses[$field] = $this->$field;
-        }
-
-        return $this->where($clauses)->get();
     }
 }
