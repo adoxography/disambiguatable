@@ -156,20 +156,31 @@ trait Disambiguatable
             return;
         }
 
-        $existing->each(
-            function ($item, $key) {
-                if ($item->disambiguator !== $key) {
-                    $method = $item->disambiguationIsSet() ? 'update' : 'create';
+        $needUpdate = $existing->filter(function ($item, $key) {
+            return $item->disambiguator !== $key;
+        });
 
-                    $item->disambiguation()->$method(
-                        [
-                            'disambiguatable_type' => get_class($item),
-                            'disambiguatable_id' => $item->id,
-                            'disambiguator' => $key
-                        ]
-                    );
-                }
-            }
-        );
+        $needUpdate->each(function ($item, $key) {
+            $item->updateDisambiguator($key);
+        });
+
+        $needUpdate->each(function ($item) {
+            $item->fresh()->afterDisambiguated();
+        });
+    }
+
+    public function updateDisambiguator(int $key): void
+    {
+        $method = $this->disambiguationIsSet() ? 'update' : 'create';
+
+        $this->disambiguation()->$method([
+            'disambiguatable_type' => self::class,
+            'disambiguatable_id' => $this->id,
+            'disambiguator' => $key
+        ]);
+    }
+
+    public function afterDisambiguated(): void
+    {
     }
 }

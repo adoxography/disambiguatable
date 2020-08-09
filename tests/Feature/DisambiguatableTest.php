@@ -142,4 +142,31 @@ class DisambiguatableTest extends TestCase
         $this->assertSame(0, $models->get(0)->disambiguator);
         $this->assertSame(1, $models->get(1)->disambiguator);
     }
+
+    /** @test */
+    public function itRunsACallbackAfterDisambiguating()
+    {
+        $callbackModel = new class extends Model {
+            use Disambiguatable;
+
+            public $table = 'dummies';
+            protected $fillable = ['field_1', 'field_2', 'field_3'];
+            protected $disambiguatableFields = ['field_1', 'field_2'];
+
+            public $callbackCalled = false;
+
+            public function afterDisambiguated()
+            {
+                $this->field_3 = 'called';
+                $this->save();
+            }
+        };
+
+        $data = ['field_1' => 'Foo', 'field_2' => 'Bar'];
+        $model1 = $callbackModel->create($data);
+        $model2 = $callbackModel->create($data);
+
+        $this->assertEquals('called', $model1->fresh()->field_3);
+        $this->assertEquals('called', $model2->fresh()->field_3);
+    }
 }
